@@ -118,9 +118,37 @@ def add(u,v):
     return Vec(u.D, {d: u[d] + v[d] for d in u.f.keys() | v.f.keys()})
 
 def dot(u,v):
-    "Returns the dot product of the two vectors"
-    assert u.D == v.D
-    return sum([getitem(v,d)*getitem(u,d) for d in u.D])
+    """
+    Returns the dot product of the two vectors.
+
+    Consider using brackets notation u[...] and v[...] in your procedure
+    to access entries of the input vectors.  This avoids some sparsity bugs.
+
+    >>> u1 = Vec({'a','b'}, {'a':1, 'b':2})
+    >>> u2 = Vec({'a','b'}, {'b':2, 'a':1})
+    >>> u1*u2
+    5
+    >>> u1 == Vec({'a','b'}, {'a':1, 'b':2})
+    True
+    >>> u2 == Vec({'a','b'}, {'b':2, 'a':1})
+    True
+    >>> v1 = Vec({'p','q','r','s'}, {'p':2,'s':3,'q':-1,'r':0})
+    >>> v2 = Vec({'p','q','r','s'}, {'p':-2,'r':5})
+    >>> v1*v2
+    -4
+    >>> w1 = Vec({'a','b','c'}, {'a':2,'b':3,'c':4})
+    >>> w2 = Vec({'a','b','c'}, {'a':12,'b':8,'c':6})
+    >>> w1*w2
+    72
+
+    The pairwise products should not be collected in a set before summing
+    because a set eliminates duplicates
+    >>> v1 = Vec({1, 2}, {1 : 3, 2 : 6})
+    >>> v2 = Vec({1, 2}, {1 : 2, 2 : 1})
+    >>> v1 * v2
+    12
+    """
+    return sum([u[d] * v[d] for d in u.f.keys() | v.f.keys()])
 
 
 def scalar_mul(v, alpha):
@@ -180,13 +208,14 @@ class Vec:
     __setitem__ = setitem
     __neg__ = neg
     __rmul__ = scalar_mul #if left arg of * is primitive, assume it's a scalar
-
+    # __mul__ = dot
     def __mul__(self,other):
         #If other is a vector, returns the dot product of self and other
         if isinstance(other, Vec):
+            print("mul")
             return dot(self,other)
-        else:
-            return NotImplemented  #  Will cause other.__rmul__(self) to be invoked
+        # else:
+        #     return NotImplemented  #  Will cause other.__rmul__(self) to be invoked
 
     def __truediv__(self,other):  # Scalar division
         return (1/other)*self
