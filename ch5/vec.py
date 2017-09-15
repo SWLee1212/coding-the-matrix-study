@@ -11,6 +11,7 @@ def getitem(v,k):
     >>> v['b']
     0
     """
+    assert k in v.D, "not a member of vector"
     if k in v.f.keys():
         return v.f[k]
     else:
@@ -34,7 +35,7 @@ def setitem(v,k,val):
     >>> v['a']
     0
     """
-
+    assert k in v.D
     v.f[k] = val
 
 def equal(u,v):
@@ -70,7 +71,7 @@ def equal(u,v):
     >>> Vec({'a','b'},{'a':1}) == Vec({'a','b'},{'a':2})
     False
     """
-
+    assert u.D == v.D
     for d in u.f.keys():
         if u[d] != v[d]:
             return False
@@ -103,7 +104,7 @@ def add(u,v):
     >>> b == Vec({'a','e','i','o','u'}, {'o':4,'u':7})
     True
 
-    
+
     >>> d = Vec({'x','y','z'}, {'x':2,'y':1})
     >>> e = Vec({'x','y','z'}, {'z':4,'y':-1})
     >>> f = Vec({'x','y','z'}, {'x':2,'y':0,'z':4})
@@ -116,7 +117,7 @@ def add(u,v):
     >>> b + Vec({'a','e','i','o','u'}, {}) == b
     True
     """
-
+    assert u.D == v.D
     return Vec(u.D, {d: u[d] + v[d] for d in u.f.keys() | v.f.keys()})
 
 def dot(u,v):
@@ -150,7 +151,7 @@ def dot(u,v):
     >>> v1 * v2
     12
     """
-
+    assert u.D == v.D
     return sum([u[d] * v[d] for d in u.f.keys() | v.f.keys()])
 
 
@@ -215,14 +216,12 @@ class Vec:
 
     def __mul__(self,other):
         #If other is a vector, returns the dot product of self and other
-        print(self, other)
-
-        if isinstance(other, Vec):
-
-
+        print("mul")
+        if Vec == type(other):
+            print("dot")
             return dot(self,other)
-        # else:
-        #     return NotImplemented  #  Will cause other.__rmul__(self) to be invoked
+        else:
+            return NotImplemented  #  Will cause other.__rmul__(self) to be invoked
 
     def __truediv__(self,other):  # Scalar division
         return (1/other)*self
