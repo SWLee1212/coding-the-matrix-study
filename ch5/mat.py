@@ -1,6 +1,6 @@
 # Copyright 2013 Philip N. Klein
 from vec import Vec
-from matutil import *
+
 #Test your Mat class over R and also over GF(2).  The following tests use only R.
 
 def getitem(M, k):
@@ -151,7 +151,11 @@ def vector_matrix_mul(v, M):
     True
     """
     assert M.D[0] == v.D
-    return sum([v[row_index] * mat2rowdict(M)[row_index] for row_index in mat2rowdict(M)])
+    v_tmp = Vec(M.D[1], {})
+    for col in v_tmp.D:
+        for row in M.D[0]:
+            v_tmp[col] = v_tmp[col] + getitem(M,(row,col)) * v[row]
+    return v_tmp
 
 def matrix_vector_mul(M, v):
     """
@@ -178,7 +182,11 @@ def matrix_vector_mul(M, v):
     True
     """
     assert M.D[1] == v.D
-    return sum([v[col_index] * mat2coldict(M)[col_index] for col_index in mat2coldict(M)])
+    v_tmp = Vec(M.D[0], {})
+    for row in v_tmp.D:
+        for col in M.D[1]:
+            v_tmp[row] = v_tmp[row] + getitem(M,(row,col)) * v[col]
+    return v_tmp
 
 
 def matrix_matrix_mul(A, B):
@@ -208,7 +216,15 @@ def matrix_matrix_mul(A, B):
     True
     """
     assert A.D[1] == B.D[0]
-    pass
+    M=Mat((A.D[0], B.D[1]), {})
+    for col in B.D[1]:
+        for row in A.D[0]:
+            v_tmp = Vec(B.D[0], {})
+            for row_t in B.D[0]:
+                v_tmp[row_t]=getitem(B, (row_t, col))
+            v = matrix_vector_mul(A, v_tmp)
+            setitem(M,(row, col), v[row])
+    return M
 
 ################################################################################
 

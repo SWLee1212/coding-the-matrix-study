@@ -216,7 +216,7 @@ class Vec:
 
     def __mul__(self,other):
         #If other is a vector, returns the dot product of self and other
-        if Vec == type(other):
+        if isinstance(other, Vec):
             return dot(self,other)
         else:
             return NotImplemented  #  Will cause other.__rmul__(self) to be invoked
