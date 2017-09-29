@@ -1,17 +1,20 @@
 mannual.txt
 stories_small.txt
 .ipynb_checkpoints/
-<<<<<<< HEAD
-.ch3/.ipynb_checkpoints/
-.ch3/__pycache__/
-.ch4/.ipynb_checkpoints/
-.ch4/__pycache__/
-.ch5/.ipynb_checkpoints/
-.ch5/__pycache__/
-=======
 ch1/.ipynb_checkpoints/
 ch2/.ipynb_checkpoints/
 ch3/.ipynb_checkpoints/
 ch4/.ipynb_checkpoints/
 ch5/.ipynb_checkpoints/
->>>>>>> 8425326a3133ed48c18a059dbef2ba080dc3d525
+ch6/.ipynb_checkpoints/
+ch1/.ipynb_checkpoints/
+ch2/.ipynb_checkpoints/
+ch3/.ipynb_checkpoints/
+ch4/.ipynb_checkpoints/
+ch1/__pycache__/
+ch2/__pycache__/
+ch3/__pycache__/
+ch4/__pycache__/
+ch5/__pycache__/
+ch6/__pycache__/
+ref/
