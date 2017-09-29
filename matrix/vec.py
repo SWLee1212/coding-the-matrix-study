@@ -1,22 +1,21 @@
+# version code 124fede7214e+
+# Please fill out this stencil and submit using the provided submission script.
+
 # Copyright 2013 Philip N. Klein
 
 def getitem(v,k):
     """
     Return the value of entry k in v.
     Be sure getitem(v,k) returns 0 if k is not represented in v.f.
-
+    >>> from vec import Vec
     >>> v = Vec({'a','b','c', 'd'},{'a':2,'c':1,'d':3})
     >>> v['d']
     3
     >>> v['b']
     0
     """
-    assert k in v.D, "not a member of vector"
-    if k in v.f.keys():
-        return v.f[k]
-    else:
-        return 0
-
+    assert k in v.D
+    pass
 
 def setitem(v,k,val):
     """
@@ -36,7 +35,7 @@ def setitem(v,k,val):
     0
     """
     assert k in v.D
-    v.f[k] = val
+    pass
 
 def equal(u,v):
     """
@@ -72,14 +71,7 @@ def equal(u,v):
     False
     """
     assert u.D == v.D
-    for d in u.f.keys():
-        if u[d] != v[d]:
-            return False
-    for d in v.f.keys():
-        if u[d] != v[d]:
-            return False
-    return True
-
+    pass
 
 def add(u,v):
     """
@@ -103,8 +95,6 @@ def add(u,v):
     True
     >>> b == Vec({'a','e','i','o','u'}, {'o':4,'u':7})
     True
-
-
     >>> d = Vec({'x','y','z'}, {'x':2,'y':1})
     >>> e = Vec({'x','y','z'}, {'z':4,'y':-1})
     >>> f = Vec({'x','y','z'}, {'x':2,'y':0,'z':4})
@@ -116,9 +106,11 @@ def add(u,v):
     True
     >>> b + Vec({'a','e','i','o','u'}, {}) == b
     True
+    >>> Vec({0, 1},{0: 1, 1: 200}) - Vec({0, 1},{0: 1}) == Vec({0, 1},{1: 200})
+    True
     """
     assert u.D == v.D
-    return Vec(u.D, {d: u[d] + v[d] for d in u.f.keys() | v.f.keys()})
+    pass
 
 def dot(u,v):
     """
@@ -152,8 +144,7 @@ def dot(u,v):
     12
     """
     assert u.D == v.D
-    return sum([u[d] * v[d] for d in u.f.keys() | v.f.keys()])
-
+    pass
 
 def scalar_mul(v, alpha):
     """
@@ -173,8 +164,7 @@ def scalar_mul(v, alpha):
     >>> u == Vec({'x','y','z','w'},{'x':1,'y':2,'z':3,'w':4})
     True
     """
-
-    return Vec(v.D, {d:alpha*v[d] for d in v.f.keys()})
+    pass
 
 def neg(v):
     """
@@ -191,7 +181,7 @@ def neg(v):
     >>> -Vec({'a','b','c'}, {'a':1}) == Vec({'a','b','c'}, {'a':-1})
     True
     """
-    return Vec(v.D, {d:-v[d] for d in v.f.keys()})
+    pass
 
 ###############################################################################################################################
 
@@ -212,7 +202,6 @@ class Vec:
     __setitem__ = setitem
     __neg__ = neg
     __rmul__ = scalar_mul #if left arg of * is primitive, assume it's a scalar
-    # __mul__ = dot
 
     def __mul__(self,other):
         #If other is a vector, returns the dot product of self and other

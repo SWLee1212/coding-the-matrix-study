@@ -11,7 +11,6 @@ def getitem(v,k):
     >>> v['b']
     0
     """
-
     assert k in v.D, "not a member of vector"
     if k in v.f.keys():
         return v.f[k]
@@ -36,7 +35,6 @@ def setitem(v,k,val):
     >>> v['a']
     0
     """
-    
     assert k in v.D
     v.f[k] = val
 
@@ -193,7 +191,6 @@ def neg(v):
     >>> -Vec({'a','b','c'}, {'a':1}) == Vec({'a','b','c'}, {'a':-1})
     True
     """
-
     return Vec(v.D, {d:-v[d] for d in v.f.keys()})
 
 ###############################################################################################################################

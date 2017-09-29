@@ -10,6 +10,7 @@ def getitem(v,k):
     3
     >>> v['b']
     0
+    
     """
 
     assert k in v.D, "not a member of vector"
@@ -36,7 +37,7 @@ def setitem(v,k,val):
     >>> v['a']
     0
     """
-    
+
     assert k in v.D
     v.f[k] = val
 
@@ -73,6 +74,7 @@ def equal(u,v):
     >>> Vec({'a','b'},{'a':1}) == Vec({'a','b'},{'a':2})
     False
     """
+
     assert u.D == v.D
     for d in u.f.keys():
         if u[d] != v[d]:
@@ -119,6 +121,7 @@ def add(u,v):
     >>> b + Vec({'a','e','i','o','u'}, {}) == b
     True
     """
+
     assert u.D == v.D
     return Vec(u.D, {d: u[d] + v[d] for d in u.f.keys() | v.f.keys()})
 
@@ -153,6 +156,7 @@ def dot(u,v):
     >>> v1 * v2
     12
     """
+
     assert u.D == v.D
     return sum([u[d] * v[d] for d in u.f.keys() | v.f.keys()])
 
